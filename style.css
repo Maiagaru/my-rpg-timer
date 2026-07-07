@@ -111,3 +111,47 @@ button { background: var(--panel-bg); color: var(--text-color); border: var(--bo
 .subtask-node.hidden-node .node-actions button:last-child {
     display: none !important;
 }
+/* ==================== 📱 行動裝置 RWD 自適應優化 ==================== */
+@media (max-width: 768px) {
+    body {
+        padding: 10px; 
+    }
+
+    .system-bar {
+        flex-direction: column; 
+        gap: 10px;
+        align-items: flex-start;
+        margin: 0 auto 15px auto; /* 手機版也要維持置中 */
+    }
+    
+    .system-bar .theme-switcher {
+        width: 100%;
+    }
+    
+    #theme-toggle-btn {
+        width: 100%; 
+    }
+
+    /* 🌟 手機版的核心：取消左右雙欄，強迫所有框框「排成一整排在中間」 */
+    .main-container {
+        grid-template-columns: 1fr !important; /* 強制切成單欄 */
+        gap: 15px;
+        margin: 0 auto; /* 強制置中 */
+        width: 100%;
+    }
+
+    /* 讓左側日誌和右側工作區在手機上寬度全滿，就不會歪到旁邊去 */
+    aside, .workspace-panel {
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    .big-counter {
+        font-size: 4.5rem !important;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 15px;
+    }
+}
