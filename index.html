@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ CORE_PROTOCOL // 戰術專注終端</title>
+    <title>⚡ CORE_PROTOCOL // 戰術專注終端 V2</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,11 +11,11 @@
     <div class="system-bar">
         <div class="sys-status">
             SYSTEM_STATUS: <span class="pulse-text">ONLINE</span>
-            
             <span style="margin-left: 20px; opacity: 0.8;">| 區段時長:</span>
             <select id="timer-config-select" style="background: rgba(0,0,0,0.2); color: var(--text-color); border: 1px solid var(--text-color); padding: 2px 5px; border-radius: 4px; font-size: 0.8rem; cursor: pointer;">
                 <option value="10">10 秒 // TEST_MODE</option>
-                <option value="1500" selected>25 分鐘 // POMODORO</option> <option value="3000">50 分鐘 // DEEP_FLOW</option>
+                <option value="1500" selected>25 分鐘 // POMODORO</option>
+                <option value="3000">50 分鐘 // DEEP_FLOW</option>
             </select>
         </div>
         <div class="theme-switcher">
@@ -25,24 +25,22 @@
 
     <div class="main-container">
         <aside class="quest-log-panel">
-    <div class="panel-title">📂 主線任務日誌 // QUEST_LOG</div>
-    <button id="open-splitter-btn" class="btn-action">+ 登錄新委託案</button>
-    
-    <div style="display: flex; gap: 8px; margin-bottom: 15px;">
-        <button id="export-data-btn" style="flex: 1; padding: 5px; font-size: 0.75rem; background: rgba(0,0,0,0.3);">💾 匯出傳輸碼</button>
-        <button id="import-data-btn" style="flex: 1; padding: 5px; font-size: 0.75rem; background: rgba(0,0,0,0.3);">📥 解碼載入</button>
-    </div>
-    
-    <div id="big-task-list" class="quest-list"></div>
+            <div class="panel-title">📂 主線任務日誌 // QUEST_LOG</div>
+            <button id="open-splitter-btn" class="btn-action">+ 登錄新委託案</button>
+            
+            <div style="display: flex; gap: 8px; margin-bottom: 15px;">
+                <button id="export-data-btn" style="flex: 1; padding: 5px; font-size: 0.75rem; background: rgba(0,0,0,0.3);">💾 匯出傳輸碼</button>
+                <button id="import-data-btn" style="flex: 1; padding: 5px; font-size: 0.75rem; background: rgba(0,0,0,0.3);">📥 解碼載入</button>
+            </div>
+            
+            <div id="big-task-list" class="quest-list"></div>
 
             <div class="sub-widget calendar-widget" style="margin-top: 30px;">
                 <div class="panel-title">📅 旅程月曆 // CALENDAR</div>
                 <div class="calendar-header" id="calendar-month-year">2026 / 07</div>
-                
                 <div class="calendar-weekdays">
                     <div>日</div><div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div>六</div>
                 </div>
-                
                 <div id="calendar-grid" class="calendar-grid"></div>
             </div>
 
@@ -61,9 +59,16 @@
 
         <main class="workspace-panel">
             <section class="subtask-tracker">
-                <div class="panel-title">🎯 當前追蹤目標 // OBJECTIVES</div>
+                <div class="panel-title">🎯 當前任務決策矩陣 // MATRIX_EXPLORER</div>
                 <div id="active-quest-title" class="active-title">請選擇一項主線任務</div>
-                <div id="subtask-pool" class="subtask-pool"></div>
+                
+                <div id="quick-add-box" class="hidden" style="display: flex; gap: 10px; margin-bottom: 15px;">
+                    <input type="text" id="quick-subtask-input" placeholder="追加新的子任務...">
+                    <button id="quick-add-btn" style="padding: 0 15px; font-size: 0.9rem;">+ 追加</button>
+                </div>
+
+                <div id="subtask-pool" class="subtask-pool">
+                    </div>
             </section>
 
             <section class="archive-panel">
@@ -81,8 +86,15 @@
                 <input type="text" id="big-task-input" placeholder="輸入主線任務...">
             </div>
             <div class="form-group">
-                <label>拆解步驟（換行輸入多個）</label>
-                <textarea id="subtasks-textarea" placeholder="每行輸入一個步驟..."></textarea>
+                <label>拆解步驟（支援階層符號！每行一個）</label>
+                <div class="guide-box" style="font-size: 0.8rem; line-height: 1.4;">
+                    💡 <strong>多層級拆解祕技：</strong><br>
+                    直接輸入 = 第一層子任務<br>
+                    前面加 1 個減號 `-` = 第二層子項目<br>
+                    前面加 2 個減號 `--` = 第三層極細節<br>
+                    <span style="color: var(--text-color); opacity: 0.6;">(例：繪製虎年獸設<br>- 骨架草稿<br>-- 調整頭身比與尾巴<br>- 精細線稿)</span>
+                </div>
+                <textarea id="subtasks-textarea" style="height: 150px;" placeholder="老虎角色設計&#10;- 繪製精細草稿&#10;-- 調整肩寬與肌肉線條&#10;-- 尾巴斑紋設計&#10;- 線稿精修"></textarea>
             </div>
             <div class="modal-actions">
                 <button id="save-split-btn" class="btn-confirm">寫入核心日誌</button>
