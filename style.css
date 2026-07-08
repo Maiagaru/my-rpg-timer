@@ -1,22 +1,20 @@
-/* 將原本 style.css 內容完全替換成這份最新版 */
-@import url('https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&display=swap');
+/* ==================== 0. 線上引入 思源黑體 (尼爾新字體) ==================== */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
 
 /* ==================== 1. 主題變數（增強清晰度版） ==================== */
 [data-theme="nier"] {
     --bg-image: url('nier-bg.jpg');
-    --bg-color: #d1cdb8;
-    
-    /* 🛠️ 尼爾清晰度優化：不透明度從 0.45 提高到 0.75，白底更厚 */
+--bg-color: #d1cdb8;
     --panel-bg: rgba(229, 226, 220, 0.75); 
     --border-style: 2px solid rgba(75, 73, 63, 0.8);
-    
     --text-color: #4b493f;
     --accent-color: #4b493f;
-    --font-family: 'LXGW WenKai TC', 'Kaiti TC', serif;
+    
+    /* 🌟 【尼爾新字體】更換為嚴謹的思源黑體與等寬體混血，徹底解決膨脹 Bug */
+    --font-family: 'Noto Sans TC', Courier, monospace;
+    
     --shadow: 0px 0px 0px transparent;
     --glow: none;
-    
-    /* 🛠️ 模糊度加倍：從 12px 提高到 25px，把背景徹底暈開 */
     --blur-intensity: 25px; 
 }
 
@@ -39,10 +37,19 @@
 }
 
 body {
-    background-image: var(--bg-image); background-color: var(--bg-color);
-    background-size: cover; background-position: center; background-attachment: fixed; background-repeat: no-repeat;
-    color: var(--text-color); font-family: var(--font-family); margin: 0; padding: 20px;
+    background-image: var(--bg-image);
+    background-color: var(--bg-color);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    color: var(--text-color);
+    font-family: var(--font-family);
+    margin: 0; padding: 20px;
     transition: background 0.4s ease-in-out, color 0.3s;
+    
+    /* 🌟 額外微調：微幅增加字距，讓思源黑體散發出高冷科技感選單的氣質 */
+    letter-spacing: 0.05em; 
 }
 
 button, input, textarea, select { font-family: var(--font-family); }
