@@ -126,7 +126,22 @@
             <button id="save-log-btn" class="btn-confirm">上傳雲端並結案</button>
         </div>
     </div>
-
+<div id="view-log-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center;">
+                <span id="view-log-title">📂 數據檔案讀取 // ARCHIVE_DATA</span>
+                <button id="close-view-log-btn" class="btn-mini" style="font-size: 1.1rem; padding: 2px 8px;">×</button>
+            </div>
+            <div class="form-group" style="margin-top: 15px;">
+                <label style="color: var(--accent-color); font-weight: bold;">>> 實質產出與收穫 // GAIN_DATA</label>
+                <div id="view-gain-text" style="background: rgba(0,0,0,0.2); padding: 12px; border-radius: 6px; min-height: 50px; white-space: pre-wrap; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.05);"></div>
+            </div>
+            <div class="form-group">
+                <label style="color: var(--accent-color); font-weight: bold;">>> 遭遇卡點與下一步 // NEXT_STEP</label>
+                <div id="view-next-text" style="background: rgba(0,0,0,0.2); padding: 12px; border-radius: 6px; min-height: 50px; white-space: pre-wrap; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.05);"></div>
+            </div>
+        </div>
+    </div>
     <script src="app.js"></script>
 </body>
 </html>

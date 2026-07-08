@@ -1,30 +1,41 @@
 /* 將原本 style.css 內容完全替換成這份最新版 */
 @import url('https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&display=swap');
 
+/* ==================== 1. 主題變數（增強清晰度版） ==================== */
 [data-theme="nier"] {
     --bg-image: url('nier-bg.jpg');
     --bg-color: #d1cdb8;
-    --panel-bg: rgba(229, 226, 220, 0.45); 
-    --border-style: 2px solid rgba(75, 73, 63, 0.6);
+    
+    /* 🛠️ 尼爾清晰度優化：不透明度從 0.45 提高到 0.75，白底更厚 */
+    --panel-bg: rgba(229, 226, 220, 0.75); 
+    --border-style: 2px solid rgba(75, 73, 63, 0.8);
+    
     --text-color: #4b493f;
     --accent-color: #4b493f;
     --font-family: 'LXGW WenKai TC', 'Kaiti TC', serif;
     --shadow: 0px 0px 0px transparent;
     --glow: none;
-    --blur-intensity: 12px;
+    
+    /* 🛠️ 模糊度加倍：從 12px 提高到 25px，把背景徹底暈開 */
+    --blur-intensity: 25px; 
 }
 
 [data-theme="cyberpunk"] {
     --bg-image: url('cyber-bg.jpg');
     --bg-color: #030303;
-    --panel-bg: rgba(10, 11, 16, 0.6); 
-    --border-style: 2px solid rgba(0, 240, 255, 0.4);
+    
+    /* 🛠️ 2077清晰度優化：不透明度從 0.6 提高到 0.85，深黑晶底色阻擋背景 */
+    --panel-bg: rgba(10, 11, 16, 0.85); 
+    --border-style: 2px solid rgba(0, 240, 255, 0.6);
+    
     --text-color: #00f0ff;
     --accent-color: #fcee09;
     --font-family: 'Courier New', Courier, monospace;
     --shadow: 4px 4px 0px rgba(0, 255, 255, 0.8); 
     --glow: 0 0 15px rgba(0, 240, 255, 0.4);
-    --blur-intensity: 8px;
+    
+    /* 🛠️ 2077模糊度也大幅加強，確保發光字體能清晰浮現 */
+    --blur-intensity: 20px; 
 }
 
 body {
@@ -154,4 +165,46 @@ button { background: var(--panel-bg); color: var(--text-color); border: var(--bo
         width: 95%;
         padding: 15px;
     }
+    /* 歷史紀錄卡片優化 */
+.archive-list div {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.archive-list div:hover {
+    background: rgb(206, 200, 185) !important;
+    border-left: 3px solid var(--text-color);
+    padding-left: 12px !important; /* 產生輕微向右推的效果 */
+}
+[data-theme="cyberpunk"] .archive-list div:hover {
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+/* ==================== 📱 貼在 style.css 最底部的 @media 內 ==================== */
+@media (max-width: 768px) {
+    
+    /* 防禦線一：強迫手機版網頁絕對不准出現橫向滾動條 */
+    html, body {
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+    }
+
+    /* 防禦線二：修正尼爾字體加粗後，撐爆大任務卡片的問題 */
+    .quest-item {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden; /* 超出的文字直接切掉 */
+    }
+
+    /* 讓任務名稱太長時，自動變成優雅的「...」省略號，絕對不擠開按鈕 */
+    .quest-item span:first-child {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-right: 5px;
+    }
+    
+    /* 稍微縮小手機版刪除鈕的間距 */
+    .quest-item .btn-mini-del {
+        flex-shrink: 0; /* 強制按鈕絕對不准被壓扁 */
+    }
+}
 }

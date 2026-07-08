@@ -22,6 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
     document.getElementById('open-splitter-btn').addEventListener('click', () => splitterModal.classList.remove('hidden'));
     document.getElementById('close-splitter-btn').addEventListener('click', () => splitterModal.classList.add('hidden'));
+    document.getElementById('quick-add-btn').addEventListener('click', quickAddSubtask);
+
+    // 🌟 新增：點擊歷史查看窗的純圖示「×」就關閉彈窗
+    document.getElementById('close-view-log-btn').addEventListener('click', () => {
+        document.getElementById('view-log-modal').classList.add('hidden');
+    });
     
     // 快捷追加子任務事件
     document.getElementById('quick-add-btn').addEventListener('click', quickAddSubtask);
@@ -281,15 +287,41 @@ document.getElementById('import-data-btn').addEventListener('click', () => {
     } catch (e) { alert("❌ [DECODE_ERROR] 解析失敗。"); }
 });
 
+// 6. 渲染歷史存檔與數據查閱（升級版：支援點擊查看反思）
 function renderArchive() {
-    const list = document.getElementById('completed-log-list'); list.innerHTML = "";
+    const list = document.getElementById('completed-log-list');
+    list.innerHTML = "";
     const logs = JSON.parse(localStorage.getItem('rpg_journey_logs')) || [];
+    
     document.getElementById('stat-count').textContent = `${logs.length} 次`;
     document.getElementById('stat-hours').textContent = `${logs.length * 25} 分鐘`;
-    if (logs.length === 0) { list.innerHTML = "<p style='opacity:0.4;'>目前尚無數據。</p>"; return; }
-    logs.forEach(log => {
-        const item = document.createElement('div'); item.style.padding = "8px"; item.style.borderBottom = "1px dashed var(--accent-color)"; item.style.fontSize = "0.9rem";
+
+    if (logs.length === 0) {
+        list.innerHTML = "<p style='opacity:0.4;'>目前尚無已下載的歷史數據。</p>";
+        return;
+    }
+    
+    // 依序渲染歷史卡片
+    logs.forEach((log, index) => {
+        const item = document.createElement('div');
+        item.style.padding = "8px";
+        item.style.borderBottom = "1px dashed var(--accent-color)";
+        item.style.fontSize = "0.9rem";
+        
+        // 渲染外觀文字
         item.innerHTML = `[${log.date}] 🟢 成功破解: <strong>${log.task}</strong> (委託: ${log.parent})`;
+        
+        // 🌟 核心進化：幫每一條紀錄綁定「點擊事件」
+        item.addEventListener('click', () => {
+            // 填入該筆紀錄當時寫下的反思與下一步
+            document.getElementById('view-log-title').textContent = `📂 檔案讀取 // ${log.task}`;
+            document.getElementById('view-gain-text').textContent = log.gain || "無紀錄";
+            document.getElementById('view-next-text').textContent = log.next || "無紀錄";
+            
+            // 帥氣浮現毛玻璃查閱窗
+            document.getElementById('view-log-modal').classList.remove('hidden');
+        });
+        
         list.appendChild(item);
     });
 }
